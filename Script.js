@@ -1,6 +1,6 @@
-const SHEET_ID =
-    "1G_gk5ec8sLd34kSf549DJJjQGDyYLwR8vZkz1AZyQVM";
+const SHEET_ID = "1G_gk5ec8sLd34kSf549DJJjQGDyYLwR8vZkz1AZyQVM";
 
+// Change this if your tab has a different name
 const SHEET_NAME = "Sheet1";
 
 const table = document.getElementById("liveTable");
@@ -11,11 +11,14 @@ const loading = document.getElementById("loading");
 const empty = document.getElementById("empty");
 
 
-/* --------------------------------
-   Load Google Sheet
--------------------------------- */
+/* ==========================================
+   LOAD GOOGLE SHEET
+========================================== */
 
 function loadSheet() {
+
+    loading.style.display = "flex";
+    empty.style.display = "none";
 
     const oldScript = document.getElementById("googleSheetScript");
 
@@ -26,6 +29,11 @@ function loadSheet() {
     const script = document.createElement("script");
 
     script.id = "googleSheetScript";
+
+    /*
+        Get all rows where column A
+        contains data.
+    */
 
     const query = encodeURIComponent(
         "select * where A is not null"
@@ -38,13 +46,24 @@ function loadSheet() {
         `&headers=1` +
         `&callback=renderTable`;
 
+    script.onerror = function () {
+
+        loading.style.display = "none";
+
+        empty.style.display = "block";
+
+        empty.textContent =
+            "Unable to load the Google Sheet.";
+
+    };
+
     document.body.appendChild(script);
 }
 
 
-/* --------------------------------
-   Google Visualization callback
--------------------------------- */
+/* ==========================================
+   GOOGLE SHEETS CALLBACK
+========================================== */
 
 function renderTable(response) {
 
@@ -53,40 +72,92 @@ function renderTable(response) {
     if (
         !response ||
         !response.table ||
-        !response.table.rows ||
-        response.table.rows.length === 0
+        !response.table.rows
     ) {
+
         empty.style.display = "block";
+
+        empty.textContent =
+            "No data found.";
+
         return;
     }
 
-    empty.style.display = "none";
 
     const columns = response.table.cols;
 
     const rows = response.table.rows;
 
-    /*
-        Only use the first 4 columns.
 
-        Change 4 to 3 if you want exactly
-        3 columns.
-    */
+    /* ======================================
+       LIMIT TABLE TO 4 COLUMNS
+    ====================================== */
 
-    const columnCount = Math.min(columns.length, 4);
+    const columnCount = Math.min(
+        columns.length,
+        4
+    );
 
 
-    /* --------------------------------
-       Create table header
-    -------------------------------- */
+    /* ======================================
+       REMOVE COMPLETELY EMPTY ROWS
+    ====================================== */
+
+    const activeRows = rows.filter(row => {
+
+        if (!row.c) {
+            return false;
+        }
+
+        return row.c
+            .slice(0, columnCount)
+            .some(cell =>
+                cell &&
+                cell.v !== null &&
+                cell.v !== undefined &&
+                String(cell.v).trim() !== ""
+            );
+    });
+
+
+    /* ======================================
+       NO ACTIVE DATA
+    ====================================== */
+
+    if (activeRows.length === 0) {
+
+        thead.innerHTML = "";
+
+        tbody.innerHTML = "";
+
+        empty.style.display = "block";
+
+        empty.textContent =
+            "No active data available.";
+
+        resizeTable();
+
+        return;
+    }
+
+
+    empty.style.display = "none";
+
+
+    /* ======================================
+       CREATE TABLE HEADER
+    ====================================== */
 
     thead.innerHTML = "";
 
-    const headerRow = document.createElement("tr");
+    const headerRow =
+        document.createElement("tr");
+
 
     for (let i = 0; i < columnCount; i++) {
 
-        const th = document.createElement("th");
+        const th =
+            document.createElement("th");
 
         th.textContent =
             columns[i].label ||
@@ -95,126 +166,184 @@ function renderTable(response) {
         headerRow.appendChild(th);
     }
 
+
     thead.appendChild(headerRow);
 
 
-    /* --------------------------------
-       Create table body
-    -------------------------------- */
+    /* ======================================
+       CREATE TABLE BODY
+    ====================================== */
 
     tbody.innerHTML = "";
 
-    rows.forEach(row => {
 
-        const tr = document.createElement("tr");
+    activeRows.forEach((row, rowIndex) => {
+
+        const tr =
+            document.createElement("tr");
+
+
+        /*
+            Add row number as a data attribute.
+        */
+
+        tr.dataset.row = rowIndex + 1;
+
 
         for (let i = 0; i < columnCount; i++) {
 
-            const td = document.createElement("td");
+            const td =
+                document.createElement("td");
 
             const cell = row.c[i];
 
-            if (!cell || cell.v === null || cell.v === undefined) {
+
+            /* Empty cell */
+
+            if (
+                !cell ||
+                cell.v === null ||
+                cell.v === undefined
+            ) {
+
                 td.textContent = "";
+
             } else {
 
+                const value =
+                    String(cell.v);
+
+                const formattedValue =
+                    cell.f || value;
+
+
                 /*
-                    If the cell contains a URL,
-                    make it clickable.
+                    Detect YouTube / website URLs
                 */
 
-                const value = String(cell.v);
-
                 if (
-                    value.startsWith("http://") ||
-                    value.startsWith("https://")
+                    value.startsWith("https://") ||
+                    value.startsWith("http://")
                 ) {
 
-                    const link = document.createElement("a");
+                    const link =
+                        document.createElement("a");
 
                     link.href = value;
 
                     link.target = "_blank";
 
-                    link.rel = "noopener noreferrer";
+                    link.rel =
+                        "noopener noreferrer";
 
-                    link.textContent = "Open";
+                    /*
+                        YouTube links get a
+                        special label.
+                    */
+
+                    if (
+                        value.includes("youtube.com") ||
+                        value.includes("youtu.be")
+                    ) {
+
+                        link.innerHTML =
+                            '<i class="fa-brands fa-youtube"></i> Watch';
+
+                    } else {
+
+                        link.innerHTML =
+                            '<i class="fa-solid fa-arrow-up-right-from-square"></i> Open';
+
+                    }
 
                     td.appendChild(link);
 
                 } else {
 
-                    td.textContent = cell.f || value;
-
+                    td.textContent =
+                        formattedValue;
                 }
             }
 
+
             tr.appendChild(td);
         }
+
 
         tbody.appendChild(tr);
 
     });
 
 
-    /*
-        Dynamically resize the table
-        based on the number of rows.
-    */
+    /* ======================================
+       UPDATE TABLE HEIGHT
+    ====================================== */
 
     resizeTable();
 }
 
 
-/* --------------------------------
-   Dynamic height
--------------------------------- */
+/* ==========================================
+   DYNAMIC TABLE HEIGHT
+========================================== */
 
 function resizeTable() {
 
     const wrapper =
         document.querySelector(".table-wrapper");
 
-    const tableHeight =
-        table.offsetHeight;
+
+    if (!wrapper || !table) {
+        return;
+    }
+
+
+    /*
+        Calculate actual table height.
+
+        This automatically increases when
+        rows are added and decreases when
+        rows disappear.
+    */
+
+    const height =
+        table.getBoundingClientRect().height;
+
 
     wrapper.style.height =
-        `${tableHeight}px`;
+        `${height}px`;
 }
 
 
-/* --------------------------------
-   Automatically refresh
--------------------------------- */
+/* ==========================================
+   AUTO REFRESH
+========================================== */
 
 /*
     Refresh every 30 seconds.
 
-    Change 30000 to another value if
-    you want a different refresh rate.
+    30000 = 30 seconds
 */
 
 setInterval(() => {
-
-    loading.style.display = "flex";
 
     loadSheet();
 
 }, 30000);
 
 
-/* --------------------------------
-   Initial load
--------------------------------- */
-
-loadSheet();
-
-
-/* --------------------------------
-   Resize when browser changes size
--------------------------------- */
+/* ==========================================
+   WINDOW RESIZE
+========================================== */
 
 window.addEventListener(
     "resize",
     resizeTable
 );
+
+
+/* ==========================================
+   INITIAL LOAD
+========================================== */
+
+loadSheet();
