@@ -1,68 +1,1432 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Devils Google Sheet Live</title>
+    <title>YouTube Live</title>
 
-    <link rel="stylesheet" href="style.css">
-
+    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================
+           COLORS
+        ========================================= */
+
+        :root {
+            --red: #ff0033;
+            --red-light: #ff1744;
+
+            --background: #080808;
+            --card: #121212;
+            --card-light: #181818;
+
+            --border: rgba(255, 255, 255, 0.09);
+
+            --text: #ffffff;
+            --muted: #999999;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(255, 0, 51, 0.16),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at 90% 100%,
+                    rgba(255, 0, 51, 0.07),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #050505,
+                    #101010
+                );
+
+        }
+
+
+        /* =========================================
+           PAGE
+        ========================================= */
+
+        .page {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            padding: 42px 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: flex-start;
+
+        }
+
+
+        /* =========================================
+           MAIN CARD
+        ========================================= */
+
+        .table-card {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            background: rgba(18, 18, 18, 0.96);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+
+                0 30px 80px rgba(0, 0, 0, 0.55),
+
+                0 0 50px rgba(255, 0, 51, 0.06);
+
+            backdrop-filter: blur(20px);
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .table-header {
+
+            min-height: 104px;
+
+            padding: 24px 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(255, 0, 51, 0.15),
+                    rgba(255, 0, 51, 0.02)
+                );
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+
+        .title-area h1 {
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.4px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .title-area h1 i {
+
+            color: var(--red);
+
+            margin-right: 8px;
+
+        }
+
+
+        .title-area p {
+
+            margin-top: 7px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           LIVE BADGE
+        ========================================= */
+
+        .live-status {
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 15px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 0, 51, 0.08);
+
+            border:
+                1px solid rgba(255, 0, 51, 0.35);
+
+            color: #ff4566;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+        .live-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--red);
+
+            box-shadow:
+                0 0 8px var(--red),
+                0 0 16px rgba(255, 0, 51, 0.5);
+
+            animation: pulse 1.4s infinite;
+
+        }
+
+
+        @keyframes pulse {
+
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(0.65);
+                opacity: 0.45;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =========================================
+           TABLE WRAPPER
+        ========================================= */
+
+        .table-wrapper {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+            overflow-y: hidden;
+
+            transition:
+                height 0.35s ease;
+
+        }
+
+
+        /* =========================================
+           TABLE
+        ========================================= */
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            table-layout: fixed;
+
+        }
+
+
+        /* =========================================
+           TABLE HEADER
+        ========================================= */
+
+        thead {
+
+            background: #202020;
+
+        }
+
+
+        th {
+
+            padding: 16px 20px;
+
+            text-align: left;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+
+            color: #eeeeee;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        /* =========================================
+           TABLE BODY
+        ========================================= */
+
+        td {
+
+            padding: 16px 20px;
+
+            font-size: 14px;
+
+            color: #dddddd;
+
+            border-bottom:
+                1px solid var(--border);
+
+            vertical-align: middle;
+
+            word-break: break-word;
+
+        }
+
+
+        tbody tr {
+
+            background: #141414;
+
+            animation:
+                rowAppear 0.35s ease both;
+
+            transition:
+
+                background 0.2s ease,
+
+                transform 0.2s ease;
+
+        }
+
+
+        tbody tr:nth-child(even) {
+
+            background: #181818;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #242424;
+
+        }
+
+
+        tbody tr:hover td:first-child {
+
+            color: #ffffff;
+
+        }
+
+
+        @keyframes rowAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(5px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================================
+           FIRST COLUMN
+        ========================================= */
+
+        tbody td:first-child {
+
+            color: #ffffff;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================================
+           LINKS
+        ========================================= */
+
+        td a {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 7px 12px;
+
+            border-radius: 7px;
+
+            color: white;
+
+            background: var(--red);
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition:
+
+                background 0.2s ease,
+
+                transform 0.2s ease,
+
+                box-shadow 0.2s ease;
+
+        }
+
+
+        td a:hover {
+
+            background: var(--red-light);
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 5px 15px rgba(255, 0, 51, 0.25);
+
+        }
+
+
+        td a i {
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading {
+
+            min-height: 160px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 11px;
+
+            color: #999999;
+
+            font-size: 14px;
+
+        }
+
+
+        .loading i {
+
+            color: var(--red);
+
+            font-size: 17px;
+
+        }
+
+
+        /* =========================================
+           EMPTY / ERROR
+        ========================================= */
+
+        .empty {
+
+            min-height: 160px;
+
+            padding: 40px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            text-align: center;
+
+            color: #999999;
+
+            font-size: 14px;
+
+        }
+
+
+        .empty i {
+
+            color: var(--red);
+
+            font-size: 22px;
+
+        }
+
+
+        .empty small {
+
+            color: #666666;
+
+        }
+
+
+        /* =========================================
+           SCROLLBAR
+        ========================================= */
+
+        .table-wrapper::-webkit-scrollbar {
+
+            height: 7px;
+
+        }
+
+
+        .table-wrapper::-webkit-scrollbar-track {
+
+            background: #0d0d0d;
+
+        }
+
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+
+            background: #3b3b3b;
+
+            border-radius: 20px;
+
+        }
+
+
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+
+            background: var(--red);
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+
+                padding:
+                    15px 10px;
+
+            }
+
+
+            .table-card {
+
+                border-radius: 14px;
+
+            }
+
+
+            .table-header {
+
+                padding: 20px;
+
+                align-items: flex-start;
+
+            }
+
+
+            .title-area h1 {
+
+                font-size: 21px;
+
+            }
+
+
+            .title-area p {
+
+                font-size: 12px;
+
+            }
+
+
+            .live-status {
+
+                padding:
+                    7px 11px;
+
+                font-size: 10px;
+
+            }
+
+
+            table {
+
+                min-width: 650px;
+
+            }
+
+
+            th {
+
+                padding:
+                    13px 14px;
+
+                font-size: 11px;
+
+            }
+
+
+            td {
+
+                padding:
+                    13px 14px;
+
+                font-size: 12px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
 
+
 <body>
+
 
     <div class="page">
 
         <div class="table-card">
 
+
+            <!-- =================================
+                 HEADER
+            ================================== -->
+
             <div class="table-header">
-                <div>
+
+                <div class="title-area">
+
                     <h1>
                         <i class="fa-brands fa-youtube"></i>
                         Google Sheet Live...
                     </h1>
 
-                    <p>Live Data to be Displayed here</p>
+                    <p>
+                        Live Data to be Displayed here
+                    </p>
+
                 </div>
+
 
                 <div class="live-status">
-                    <span></span>
-                    Live............
+
+                    <span class="live-dot"></span>
+
+                    Live..........
+
                 </div>
+
             </div>
 
-           <div class="table-wrapper">
 
-    <table id="liveTable">
+            <!-- =================================
+                 TABLE
+            ================================== -->
 
-        <thead></thead>
+            <div
+                class="table-wrapper"
+                id="tableWrapper"
+            >
 
-        <tbody></tbody>
+                <table id="liveTable">
 
-    </table>
+                    <thead></thead>
 
-    <div id="loading" class="loading">
-        <i class="fa-solid fa-spinner fa-spin"></i>
-        Shortly With You.......
-    </div>
+                    <tbody></tbody>
 
-    <div id="empty" class="empty" style="display:none;">
-        No active data available.
-    </div>
+                </table>
 
-</div>
 
+                <!-- Loading -->
+
+                <div
+                    id="loading"
+                    class="loading"
+                >
+
+                    <i
+                        class="fa-solid fa-spinner fa-spin"
+                    ></i>
+
+                    Shortly With You.......
+
+                </div>
+
+
+                <!-- Empty -->
+
+                <div
+                    id="empty"
+                    class="empty"
+                    style="display:none;"
+                >
+
+                    <i
+                        class="fa-solid fa-circle-info"
+                    ></i>
+
+                    No active data available.
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-    <script src="script.js"></script>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /* =========================================
+           GOOGLE SHEET SETTINGS
+        ========================================= */
+
+        const SHEET_ID =
+            "1G_gk5ec8sLd34kSf549DJJjQGDyYLwR8vZkz1AZyQVM";
+
+
+        /*
+         * 0 = first sheet/tab
+         *
+         * If your required tab has another GID,
+         * change this number.
+         */
+
+        const SHEET_GID = "0";
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const table =
+            document.getElementById("liveTable");
+
+        const thead =
+            table.querySelector("thead");
+
+        const tbody =
+            table.querySelector("tbody");
+
+        const loading =
+            document.getElementById("loading");
+
+        const empty =
+            document.getElementById("empty");
+
+        const tableWrapper =
+            document.getElementById("tableWrapper");
+
+
+
+        /* =========================================
+           LOAD GOOGLE SHEET
+        ========================================= */
+
+        function loadSheet() {
+
+            loading.style.display = "flex";
+
+            empty.style.display = "none";
+
+
+            /*
+             * Remove previous API script
+             */
+
+            const oldScript =
+                document.getElementById(
+                    "googleSheetScript"
+                );
+
+
+            if (oldScript) {
+
+                oldScript.remove();
+
+            }
+
+
+            /*
+             * Google Visualization query
+             *
+             * A must contain data.
+             */
+
+            const query =
+                encodeURIComponent(
+                    "select * where A is not null"
+                );
+
+
+            const url =
+                "https://docs.google.com/spreadsheets/d/" +
+                SHEET_ID +
+                "/gviz/tq?" +
+                "gid=" +
+                SHEET_GID +
+                "&tqx=responseHandler:renderTable" +
+                "&tq=" +
+                query;
+
+
+            console.log(
+                "Loading Google Sheet..."
+            );
+
+
+            console.log(url);
+
+
+            /*
+             * Create JSONP script
+             */
+
+            const script =
+                document.createElement("script");
+
+
+            script.id =
+                "googleSheetScript";
+
+
+            script.src =
+                url;
+
+
+            /*
+             * Error handling
+             */
+
+            script.onerror =
+                function () {
+
+                    loading.style.display =
+                        "none";
+
+                    empty.style.display =
+                        "flex";
+
+                    empty.innerHTML = `
+
+                        <i class="
+                            fa-solid
+                            fa-triangle-exclamation
+                        "></i>
+
+                        Unable to load Google Sheet.
+
+                        <small>
+                            Make sure the sheet is
+                            publicly accessible.
+                        </small>
+
+                    `;
+
+                    resizeTable();
+
+                };
+
+
+            document.body.appendChild(script);
+
+        }
+
+
+
+        /* =========================================
+           GOOGLE SHEET RESPONSE
+        ========================================= */
+
+        window.renderTable =
+            function (response) {
+
+                console.log(
+                    "Google Sheet response:",
+                    response
+                );
+
+
+                loading.style.display =
+                    "none";
+
+
+                /*
+                 * Check response
+                 */
+
+                if (
+                    !response ||
+                    !response.table
+                ) {
+
+                    showEmpty(
+                        "No data received from Google Sheet."
+                    );
+
+                    return;
+
+                }
+
+
+                const columns =
+                    response.table.cols || [];
+
+
+                const rows =
+                    response.table.rows || [];
+
+
+                /*
+                 * Maximum 4 columns
+                 */
+
+                const columnCount =
+                    Math.min(
+                        columns.length,
+                        4
+                    );
+
+
+                /*
+                 * Find active rows
+                 *
+                 * Completely blank rows
+                 * are removed.
+                 */
+
+                const activeRows =
+                    rows.filter(
+                        function (row) {
+
+                            if (
+                                !row ||
+                                !row.c
+                            ) {
+
+                                return false;
+
+                            }
+
+
+                            return row.c
+                                .slice(
+                                    0,
+                                    columnCount
+                                )
+                                .some(
+                                    function (cell) {
+
+                                        if (
+                                            !cell ||
+                                            cell.v === null ||
+                                            cell.v === undefined
+                                        ) {
+
+                                            return false;
+
+                                        }
+
+
+                                        return String(
+                                            cell.v
+                                        )
+                                        .trim()
+                                        .length > 0;
+
+                                    }
+                                );
+
+                        }
+                    );
+
+
+                console.log(
+                    "Active rows:",
+                    activeRows.length
+                );
+
+
+                /*
+                 * No active rows
+                 */
+
+                if (
+                    activeRows.length === 0
+                ) {
+
+                    thead.innerHTML = "";
+
+                    tbody.innerHTML = "";
+
+                    showEmpty(
+                        "No active data available."
+                    );
+
+                    resizeTable();
+
+                    return;
+
+                }
+
+
+                empty.style.display =
+                    "none";
+
+
+                /* =================================
+                   HEADER
+                ================================= */
+
+                thead.innerHTML = "";
+
+
+                const headerRow =
+                    document.createElement("tr");
+
+
+                for (
+                    let i = 0;
+                    i < columnCount;
+                    i++
+                ) {
+
+                    const th =
+                        document.createElement("th");
+
+
+                    th.textContent =
+                        columns[i].label ||
+                        `Column ${i + 1}`;
+
+
+                    headerRow.appendChild(th);
+
+                }
+
+
+                thead.appendChild(
+                    headerRow
+                );
+
+
+
+                /* =================================
+                   BODY
+                ================================= */
+
+                tbody.innerHTML = "";
+
+
+                activeRows.forEach(
+                    function (row, index) {
+
+                        const tr =
+                            document.createElement("tr");
+
+
+                        /*
+                         * Animation
+                         */
+
+                        tr.style.animationDelay =
+                            `${index * 40}ms`;
+
+
+                        for (
+                            let i = 0;
+                            i < columnCount;
+                            i++
+                        ) {
+
+                            const td =
+                                document.createElement("td");
+
+
+                            const cell =
+                                row.c[i];
+
+
+                            /*
+                             * Empty cell
+                             */
+
+                            if (
+                                !cell ||
+                                cell.v === null ||
+                                cell.v === undefined
+                            ) {
+
+                                td.textContent = "";
+
+                                tr.appendChild(td);
+
+                                continue;
+
+                            }
+
+
+                            const rawValue =
+                                String(cell.v);
+
+
+                            const displayValue =
+                                cell.f !== undefined
+                                    ? cell.f
+                                    : rawValue;
+
+
+                            /*
+                             * Detect URL
+                             */
+
+                            if (
+                                rawValue.startsWith(
+                                    "http://"
+                                ) ||
+
+                                rawValue.startsWith(
+                                    "https://"
+                                )
+                            ) {
+
+                                const link =
+                                    document.createElement(
+                                        "a"
+                                    );
+
+
+                                link.href =
+                                    rawValue;
+
+
+                                link.target =
+                                    "_blank";
+
+
+                                link.rel =
+                                    "noopener noreferrer";
+
+
+                                /*
+                                 * YouTube button
+                                 */
+
+                                if (
+                                    rawValue.includes(
+                                        "youtube.com"
+                                    ) ||
+
+                                    rawValue.includes(
+                                        "youtu.be"
+                                    )
+                                ) {
+
+                                    link.innerHTML =
+                                        `
+                                        <i class="
+                                            fa-brands
+                                            fa-youtube
+                                        "></i>
+
+                                        Watch
+                                        `;
+
+                                } else {
+
+                                    link.innerHTML =
+                                        `
+                                        <i class="
+                                            fa-solid
+                                            fa-arrow-up-right-from-square
+                                        "></i>
+
+                                        Open
+                                        `;
+
+                                }
+
+
+                                td.appendChild(
+                                    link
+                                );
+
+                            } else {
+
+                                td.textContent =
+                                    displayValue;
+
+                            }
+
+
+                            tr.appendChild(td);
+
+                        }
+
+
+                        tbody.appendChild(tr);
+
+                    }
+                );
+
+
+                /*
+                 * Resize after table
+                 * has rendered.
+                 */
+
+                requestAnimationFrame(
+                    function () {
+
+                        resizeTable();
+
+                    }
+                );
+
+            };
+
+
+
+        /* =========================================
+           EMPTY STATE
+        ========================================= */
+
+        function showEmpty(message) {
+
+            loading.style.display =
+                "none";
+
+
+            empty.style.display =
+                "flex";
+
+
+            empty.innerHTML = `
+
+                <i class="
+                    fa-solid
+                    fa-circle-info
+                "></i>
+
+                ${message}
+
+            `;
+
+
+            resizeTable();
+
+        }
+
+
+
+        /* =========================================
+           DYNAMIC HEIGHT
+        ========================================= */
+
+        function resizeTable() {
+
+            if (
+                !tableWrapper ||
+                !table
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+             * If table has rows,
+             * use the actual table height.
+             */
+
+            if (
+                tbody.children.length > 0
+            ) {
+
+                const height =
+                    table.getBoundingClientRect()
+                        .height;
+
+
+                tableWrapper.style.height =
+                    `${height}px`;
+
+            } else {
+
+                /*
+                 * Keep enough height for
+                 * loading / empty message.
+                 */
+
+                tableWrapper.style.height =
+                    "160px";
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           AUTO REFRESH
+        ========================================= */
+
+        /*
+         * Refresh every 30 seconds.
+         */
+
+        setInterval(
+            function () {
+
+                loadSheet();
+
+            },
+            30000
+        );
+
+
+
+        /* =========================================
+           RESIZE
+        ========================================= */
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                resizeTable();
+
+            }
+        );
+
+
+
+        /* =========================================
+           START
+        ========================================= */
+
+        loadSheet();
+
+    </script>
 
 </body>
+
 </html>
