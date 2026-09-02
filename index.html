@@ -15,7 +15,48 @@
 </head>
 
 <body>
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQH6Qkk4XLwAkpB5GTw-uCyp7IjaU1hl4G2TtIYQq9DMHliTmPmhCJSSbl1VF2OGvGCgK30a1OrI4lK/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+
+    <div class="page">
+
+        <div class="table-card">
+
+            <div class="table-header">
+                <div>
+                    <h1>
+                        <i class="fa-brands fa-youtube"></i>
+                        YouTube Live
+                    </h1>
+
+                    <p>Live schedule and updates</p>
+                </div>
+
+                <div class="live-status">
+                    <span></span>
+                    LIVE
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="liveTable">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+
+                <div id="loading" class="loading">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Loading...
+                </div>
+
+                <div id="empty" class="empty" style="display:none;">
+                    No active data available.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
