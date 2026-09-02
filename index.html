@@ -1,17 +1,19 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>lol  Live</title>
+    <title>lol Live</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
     <style>
-
-        /* =========================================
-           RESET
-        ========================================= */
 
         * {
             margin: 0;
@@ -19,29 +21,16 @@
             box-sizing: border-box;
         }
 
-
-        /* =========================================
-           COLORS
-        ========================================= */
-
         :root {
             --red: #ff0033;
             --red-light: #ff1744;
-
             --background: #080808;
             --card: #121212;
             --card-light: #181818;
-
             --border: rgba(255, 255, 255, 0.09);
-
             --text: #ffffff;
             --muted: #999999;
         }
-
-
-        /* =========================================
-           BODY
-        ========================================= */
 
         body {
 
@@ -73,13 +62,8 @@
                     #050505,
                     #101010
                 );
-
         }
 
-
-        /* =========================================
-           PAGE
-        ========================================= */
 
         .page {
 
@@ -94,13 +78,8 @@
             justify-content: center;
 
             align-items: flex-start;
-
         }
 
-
-        /* =========================================
-           MAIN CARD
-        ========================================= */
 
         .table-card {
 
@@ -123,13 +102,8 @@
                 0 0 50px rgba(255, 0, 51, 0.06);
 
             backdrop-filter: blur(20px);
-
         }
 
-
-        /* =========================================
-           HEADER
-        ========================================= */
 
         .table-header {
 
@@ -154,7 +128,6 @@
                 );
 
             border-bottom: 1px solid var(--border);
-
         }
 
 
@@ -171,7 +144,6 @@
             overflow: hidden;
 
             text-overflow: ellipsis;
-
         }
 
 
@@ -180,7 +152,6 @@
             color: var(--red);
 
             margin-right: 8px;
-
         }
 
 
@@ -191,13 +162,8 @@
             color: var(--muted);
 
             font-size: 14px;
-
         }
 
-
-        /* =========================================
-           LIVE BADGE
-        ========================================= */
 
         .live-status {
 
@@ -226,7 +192,6 @@
             font-weight: 700;
 
             letter-spacing: 0.5px;
-
         }
 
 
@@ -245,7 +210,6 @@
                 0 0 16px rgba(255, 0, 51, 0.5);
 
             animation: pulse 1.4s infinite;
-
         }
 
 
@@ -265,13 +229,8 @@
                 transform: scale(1);
                 opacity: 1;
             }
-
         }
 
-
-        /* =========================================
-           TABLE WRAPPER
-        ========================================= */
 
         .table-wrapper {
 
@@ -283,13 +242,8 @@
 
             transition:
                 height 0.35s ease;
-
         }
 
-
-        /* =========================================
-           TABLE
-        ========================================= */
 
         table {
 
@@ -298,18 +252,12 @@
             border-collapse: collapse;
 
             table-layout: fixed;
-
         }
 
-
-        /* =========================================
-           TABLE HEADER
-        ========================================= */
 
         thead {
 
             background: #202020;
-
         }
 
 
@@ -331,13 +279,8 @@
 
             border-bottom:
                 1px solid var(--border);
-
         }
 
-
-        /* =========================================
-           TABLE BODY
-        ========================================= */
 
         td {
 
@@ -353,7 +296,6 @@
             vertical-align: middle;
 
             word-break: break-word;
-
         }
 
 
@@ -369,28 +311,24 @@
                 background 0.2s ease,
 
                 transform 0.2s ease;
-
         }
 
 
         tbody tr:nth-child(even) {
 
             background: #181818;
-
         }
 
 
         tbody tr:hover {
 
             background: #242424;
-
         }
 
 
         tbody tr:hover td:first-child {
 
             color: #ffffff;
-
         }
 
 
@@ -402,7 +340,6 @@
 
                 transform:
                     translateY(5px);
-
             }
 
             to {
@@ -411,28 +348,17 @@
 
                 transform:
                     translateY(0);
-
             }
-
         }
 
-
-        /* =========================================
-           FIRST COLUMN
-        ========================================= */
 
         tbody td:first-child {
 
             color: #ffffff;
 
             font-weight: 600;
-
         }
 
-
-        /* =========================================
-           LINKS
-        ========================================= */
 
         td a {
 
@@ -463,7 +389,6 @@
                 transform 0.2s ease,
 
                 box-shadow 0.2s ease;
-
         }
 
 
@@ -475,21 +400,16 @@
                 translateY(-1px);
 
             box-shadow:
-                0 5px 15px rgba(255, 0, 51, 0.25);
-
+                0 5px 15px
+                rgba(255, 0, 51, 0.25);
         }
 
 
         td a i {
 
             font-size: 12px;
-
         }
 
-
-        /* =========================================
-           LOADING
-        ========================================= */
 
         .loading {
 
@@ -506,7 +426,6 @@
             color: #999999;
 
             font-size: 14px;
-
         }
 
 
@@ -515,13 +434,8 @@
             color: var(--red);
 
             font-size: 17px;
-
         }
 
-
-        /* =========================================
-           EMPTY / ERROR
-        ========================================= */
 
         .empty {
 
@@ -544,7 +458,6 @@
             color: #999999;
 
             font-size: 14px;
-
         }
 
 
@@ -553,32 +466,24 @@
             color: var(--red);
 
             font-size: 22px;
-
         }
 
 
         .empty small {
 
             color: #666666;
-
         }
 
-
-        /* =========================================
-           SCROLLBAR
-        ========================================= */
 
         .table-wrapper::-webkit-scrollbar {
 
             height: 7px;
-
         }
 
 
         .table-wrapper::-webkit-scrollbar-track {
 
             background: #0d0d0d;
-
         }
 
 
@@ -587,20 +492,14 @@
             background: #3b3b3b;
 
             border-radius: 20px;
-
         }
 
 
         .table-wrapper::-webkit-scrollbar-thumb:hover {
 
             background: var(--red);
-
         }
 
-
-        /* =========================================
-           MOBILE
-        ========================================= */
 
         @media (max-width: 700px) {
 
@@ -608,14 +507,12 @@
 
                 padding:
                     15px 10px;
-
             }
 
 
             .table-card {
 
                 border-radius: 14px;
-
             }
 
 
@@ -624,21 +521,18 @@
                 padding: 20px;
 
                 align-items: flex-start;
-
             }
 
 
             .title-area h1 {
 
                 font-size: 21px;
-
             }
 
 
             .title-area p {
 
                 font-size: 12px;
-
             }
 
 
@@ -648,14 +542,12 @@
                     7px 11px;
 
                 font-size: 10px;
-
             }
 
 
             table {
 
-                min-width: 650px;
-
+                min-width: 750px;
             }
 
 
@@ -665,7 +557,6 @@
                     13px 14px;
 
                 font-size: 11px;
-
             }
 
 
@@ -675,9 +566,7 @@
                     13px 14px;
 
                 font-size: 12px;
-
             }
-
         }
 
     </style>
@@ -688,189 +577,91 @@
 <body>
 
 
-    <div class="page">
+<div class="page">
 
-        <div class="table-card">
-
-
-            <!-- =================================
-                 HEADER
-            ================================== -->
-
-            <div class="table-header">
-
-                <div class="title-area">
-
-                    <h1>
-                        <i class="fa-brands fa-youtube"></i>
-                        Google Sheet Live...
-                    </h1>
-
-                    <p>
-                        Live Data to be Displayed here
-                    </p>
-
-                </div>
+    <div class="table-card">
 
 
-                <div class="live-status">
+        <!-- HEADER -->
 
-                    <span class="live-dot"></span>
+        <div class="table-header">
 
-                    Live..........
+            <div class="title-area">
 
-                </div>
+                <h1>
+
+                    <i class="fa-brands fa-youtube"></i>
+
+                    Google Sheet Live...
+
+                </h1>
+
+                <p>
+                    Live Data to be Displayed here
+                </p>
 
             </div>
 
 
-            <!-- =================================
-                 TABLE
-            ================================== -->
+            <div class="live-status">
 
-            <div class="table-wrapper" id="tableWrapper" style="height: 3473px;">
+                <span class="live-dot"></span>
 
-                <table id="liveTable">
+                Live..........
 
-                    <thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th></tr></thead>
+            </div>
 
-                    <tbody><tr style="animation-delay: 0ms;"><td>1</td><td>lol1</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 40ms;"><td>2</td><td>lol2</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 80ms;"><td>3</td><td>lol3</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 120ms;"><td>4</td><td>lol4</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 160ms;"><td>5</td><td>lol5</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 200ms;"><td>6</td><td>lol6</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 240ms;"><td>7</td><td>lol7</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 280ms;"><td>8</td><td>lol8</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 320ms;"><td>9</td><td>lol9</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 360ms;"><td>10</td><td>lol10</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 400ms;"><td>11</td><td>lol11</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 440ms;"><td>12</td><td>lol12</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 480ms;"><td>13</td><td>lol13</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 520ms;"><td>14</td><td>lol14</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 560ms;"><td>15</td><td>lol15</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 600ms;"><td>16</td><td>lol16</td><td><a href="https://youtu.be/xvT1jH8B9AM?si=1Q9sjyk6jTxlUiXF" target="_blank" rel="noopener noreferrer">
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        </a></td><td>yes</td></tr><tr style="animation-delay: 640ms;"><td>17</td><td>lol17</td><td></td><td></td></tr><tr style="animation-delay: 680ms;"><td>18</td><td>lol18</td><td></td><td></td></tr><tr style="animation-delay: 720ms;"><td>19</td><td>lol19</td><td></td><td></td></tr><tr style="animation-delay: 760ms;"><td>20</td><td>lol20</td><td></td><td></td></tr><tr style="animation-delay: 800ms;"><td>21</td><td></td><td></td><td></td></tr><tr style="animation-delay: 840ms;"><td>22</td><td></td><td></td><td></td></tr><tr style="animation-delay: 880ms;"><td>23</td><td></td><td></td><td></td></tr><tr style="animation-delay: 920ms;"><td>24</td><td></td><td></td><td></td></tr><tr style="animation-delay: 960ms;"><td>25</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1000ms;"><td>26</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1040ms;"><td>27</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1080ms;"><td>28</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1120ms;"><td>29</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1160ms;"><td>30</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1200ms;"><td>31</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1240ms;"><td>32</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1280ms;"><td>33</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1320ms;"><td>34</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1360ms;"><td>35</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1400ms;"><td>36</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1440ms;"><td>37</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1480ms;"><td>38</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1520ms;"><td>39</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1560ms;"><td>40</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1600ms;"><td>41</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1640ms;"><td>42</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1680ms;"><td>43</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1720ms;"><td>44</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1760ms;"><td>45</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1800ms;"><td>46</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1840ms;"><td>47</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1880ms;"><td>48</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1920ms;"><td>49</td><td></td><td></td><td></td></tr><tr style="animation-delay: 1960ms;"><td>50</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2000ms;"><td>51</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2040ms;"><td>52</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2080ms;"><td>53</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2120ms;"><td>54</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2160ms;"><td>55</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2200ms;"><td>56</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2240ms;"><td>57</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2280ms;"><td>58</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2320ms;"><td>59</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2360ms;"><td>60</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2400ms;"><td>61</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2440ms;"><td>62</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2480ms;"><td>63</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2520ms;"><td>64</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2560ms;"><td>65</td><td></td><td></td><td></td></tr><tr style="animation-delay: 2600ms;"><td>66</td><td></td><td></td><td></td></tr></tbody>
-
-                </table>
+        </div>
 
 
-                <!-- Loading -->
+        <!-- TABLE -->
 
-                <div id="loading" class="loading" style="display: none;">
+        <div
+            class="table-wrapper"
+            id="tableWrapper"
+        >
 
-                    <i class="fa-solid fa-spinner fa-spin"></i>
+            <table id="liveTable">
 
-                    Shortly With You.......
+                <thead></thead>
 
-                </div>
+                <tbody></tbody>
+
+            </table>
 
 
-                <!-- Empty -->
+            <!-- LOADING -->
 
-                <div id="empty" class="empty" style="display:none;">
+            <div
+                id="loading"
+                class="loading"
+            >
 
-                    <i class="fa-solid fa-circle-info"></i>
+                <i
+                    class="fa-solid
+                    fa-spinner
+                    fa-spin"
+                ></i>
 
-                    No active data available.
+                Shortly With You.......
 
-                </div>
+            </div>
+
+
+            <!-- EMPTY -->
+
+            <div
+                id="empty"
+                class="empty"
+                style="display:none;"
+            >
+
+                <i
+                    class="fa-solid
+                    fa-circle-info"
+                ></i>
+
+                No active data available.
 
             </div>
 
@@ -878,529 +669,189 @@
 
     </div>
 
+</div>
 
 
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
 
-    <script>
+<script>
 
-        /* =========================================
-           GOOGLE SHEET SETTINGS
-        ========================================= */
 
-        const SHEET_ID =
-            "1G_gk5ec8sLd34kSf549DJJjQGDyYLwR8vZkz1AZyQVM";
+/* =========================================
+   GOOGLE SHEET SETTINGS
+========================================= */
 
 
-        /*
-         * 0 = first sheet/tab
-         *
-         * If your required tab has another GID,
-         * change this number.
-         */
+/*
+ * YOUR GOOGLE SHEET ID
+ */
 
-        const SHEET_GID = "0";
+const SHEET_ID =
+    "1G_gk5ec8sLd34kSf549DJJjQGDyYLwR8vZkz1AZyQVM";
 
 
-        /* =========================================
-           ELEMENTS
-        ========================================= */
+/*
+ * First Sheet / Tab
+ */
 
-        const table =
-            document.getElementById("liveTable");
+const SHEET_GID = "0";
 
-        const thead =
-            table.querySelector("thead");
 
-        const tbody =
-            table.querySelector("tbody");
+/*
+ * TABLE RANGE
+ *
+ * A1:E500 means:
+ *
+ * A = Column 1
+ * B = Column 2
+ * C = Column 3
+ * D = Column 4
+ * E = Column 5
+ *
+ * Rows 1 through 500
+ */
 
-        const loading =
-            document.getElementById("loading");
+const SHEET_RANGE = "A1:E500";
 
-        const empty =
-            document.getElementById("empty");
 
-        const tableWrapper =
-            document.getElementById("tableWrapper");
 
+/* =========================================
+   ELEMENTS
+========================================= */
 
+const table =
+    document.getElementById(
+        "liveTable"
+    );
 
-        /* =========================================
-           LOAD GOOGLE SHEET
-        ========================================= */
+const thead =
+    table.querySelector(
+        "thead"
+    );
 
-        function loadSheet() {
+const tbody =
+    table.querySelector(
+        "tbody"
+    );
 
-            loading.style.display = "flex";
+const loading =
+    document.getElementById(
+        "loading"
+    );
 
-            empty.style.display = "none";
+const empty =
+    document.getElementById(
+        "empty"
+    );
 
+const tableWrapper =
+    document.getElementById(
+        "tableWrapper"
+    );
 
-            /*
-             * Remove previous API script
-             */
 
-            const oldScript =
-                document.getElementById(
-                    "googleSheetScript"
-                );
 
+/* =========================================
+   LOAD GOOGLE SHEET
+========================================= */
 
-            if (oldScript) {
+function loadSheet() {
 
-                oldScript.remove();
 
-            }
+    loading.style.display =
+        "flex";
 
 
-            /*
-             * Google Visualization query
-             *
-             * A must contain data.
-             */
+    empty.style.display =
+        "none";
 
-            const query =
-                encodeURIComponent(
-                    "select * where A is not null"
-                );
 
+    /*
+     * Remove previous script
+     */
 
-            const url =
-                "https://docs.google.com/spreadsheets/d/" +
-                SHEET_ID +
-                "/gviz/tq?" +
-                "gid=" +
-                SHEET_GID +
-                "&tqx=responseHandler:renderTable" +
-                "&tq=" +
-                query;
+    const oldScript =
+        document.getElementById(
+            "googleSheetScript"
+        );
 
 
-            console.log(
-                "Loading Google Sheet..."
-            );
+    if (oldScript) {
 
+        oldScript.remove();
 
-            console.log(url);
+    }
 
 
-            /*
-             * Create JSONP script
-             */
 
-            const script =
-                document.createElement("script");
+    /*
+     * Query only A1:E500
+     */
 
+    const query =
+        encodeURIComponent(
+            "select *"
+        );
 
-            script.id =
-                "googleSheetScript";
 
 
-            script.src =
-                url;
+    /*
+     * GOOGLE GVIZ URL
+     */
 
+    const url =
+        "https://docs.google.com/spreadsheets/d/" +
 
-            /*
-             * Error handling
-             */
+        SHEET_ID +
 
-            script.onerror =
-                function () {
+        "/gviz/tq?" +
 
-                    loading.style.display =
-                        "none";
+        "gid=" +
+        SHEET_GID +
 
-                    empty.style.display =
-                        "flex";
+        "&range=" +
+        encodeURIComponent(
+            SHEET_RANGE
+        ) +
 
-                    empty.innerHTML = `
+        "&tqx=responseHandler:renderTable" +
 
-                        <i class="
-                            fa-solid
-                            fa-triangle-exclamation
-                        "></i>
+        "&tq=" +
+        query;
 
-                        Unable to load Google Sheet.
 
-                        <small>
-                            Make sure the sheet is
-                            publicly accessible.
-                        </small>
 
-                    `;
+    console.log(
+        "Google Sheet URL:",
+        url
+    );
 
-                    resizeTable();
 
-                };
 
+    /*
+     * Create script
+     */
 
-            document.body.appendChild(script);
+    const script =
+        document.createElement(
+            "script"
+        );
 
-        }
 
+    script.id =
+        "googleSheetScript";
 
 
-        /* =========================================
-           GOOGLE SHEET RESPONSE
-        ========================================= */
+    script.src =
+        url;
 
-        window.renderTable =
-            function (response) {
 
-                console.log(
-                    "Google Sheet response:",
-                    response
-                );
 
+    /*
+     * Error
+     */
 
-                loading.style.display =
-                    "none";
-
-
-                /*
-                 * Check response
-                 */
-
-                if (
-                    !response ||
-                    !response.table
-                ) {
-
-                    showEmpty(
-                        "No data received from Google Sheet."
-                    );
-
-                    return;
-
-                }
-
-
-                const columns =
-                    response.table.cols || [];
-
-
-                const rows =
-                    response.table.rows || [];
-
-
-                /*
-                 * Maximum 4 columns
-                 */
-
-                const columnCount =
-                    Math.min(
-                        columns.length,
-                        4
-                    );
-
-
-                /*
-                 * Find active rows
-                 *
-                 * Completely blank rows
-                 * are removed.
-                 */
-
-                const activeRows =
-                    rows.filter(
-                        function (row) {
-
-                            if (
-                                !row ||
-                                !row.c
-                            ) {
-
-                                return false;
-
-                            }
-
-
-                            return row.c
-                                .slice(
-                                    0,
-                                    columnCount
-                                )
-                                .some(
-                                    function (cell) {
-
-                                        if (
-                                            !cell ||
-                                            cell.v === null ||
-                                            cell.v === undefined
-                                        ) {
-
-                                            return false;
-
-                                        }
-
-
-                                        return String(
-                                            cell.v
-                                        )
-                                        .trim()
-                                        .length > 0;
-
-                                    }
-                                );
-
-                        }
-                    );
-
-
-                console.log(
-                    "Active rows:",
-                    activeRows.length
-                );
-
-
-                /*
-                 * No active rows
-                 */
-
-                if (
-                    activeRows.length === 0
-                ) {
-
-                    thead.innerHTML = "";
-
-                    tbody.innerHTML = "";
-
-                    showEmpty(
-                        "No active data available."
-                    );
-
-                    resizeTable();
-
-                    return;
-
-                }
-
-
-                empty.style.display =
-                    "none";
-
-
-                /* =================================
-                   HEADER
-                ================================= */
-
-                thead.innerHTML = "";
-
-
-                const headerRow =
-                    document.createElement("tr");
-
-
-                for (
-                    let i = 0;
-                    i < columnCount;
-                    i++
-                ) {
-
-                    const th =
-                        document.createElement("th");
-
-
-                    th.textContent =
-                        columns[i].label ||
-                        `Column ${i + 1}`;
-
-
-                    headerRow.appendChild(th);
-
-                }
-
-
-                thead.appendChild(
-                    headerRow
-                );
-
-
-
-                /* =================================
-                   BODY
-                ================================= */
-
-                tbody.innerHTML = "";
-
-
-                activeRows.forEach(
-                    function (row, index) {
-
-                        const tr =
-                            document.createElement("tr");
-
-
-                        /*
-                         * Animation
-                         */
-
-                        tr.style.animationDelay =
-                            `${index * 40}ms`;
-
-
-                        for (
-                            let i = 0;
-                            i < columnCount;
-                            i++
-                        ) {
-
-                            const td =
-                                document.createElement("td");
-
-
-                            const cell =
-                                row.c[i];
-
-
-                            /*
-                             * Empty cell
-                             */
-
-                            if (
-                                !cell ||
-                                cell.v === null ||
-                                cell.v === undefined
-                            ) {
-
-                                td.textContent = "";
-
-                                tr.appendChild(td);
-
-                                continue;
-
-                            }
-
-
-                            const rawValue =
-                                String(cell.v);
-
-
-                            const displayValue =
-                                cell.f !== undefined
-                                    ? cell.f
-                                    : rawValue;
-
-
-                            /*
-                             * Detect URL
-                             */
-
-                            if (
-                                rawValue.startsWith(
-                                    "http://"
-                                ) ||
-
-                                rawValue.startsWith(
-                                    "https://"
-                                )
-                            ) {
-
-                                const link =
-                                    document.createElement(
-                                        "a"
-                                    );
-
-
-                                link.href =
-                                    rawValue;
-
-
-                                link.target =
-                                    "_blank";
-
-
-                                link.rel =
-                                    "noopener noreferrer";
-
-
-                                /*
-                                 * YouTube button
-                                 */
-
-                                if (
-                                    rawValue.includes(
-                                        "youtube.com"
-                                    ) ||
-
-                                    rawValue.includes(
-                                        "youtu.be"
-                                    )
-                                ) {
-
-                                    link.innerHTML =
-                                        `
-                                        <i class="
-                                            fa-brands
-                                            fa-youtube
-                                        "></i>
-
-                                        Watch On YouTube On YouTube
-                                        `;
-
-                                } else {
-
-                                    link.innerHTML =
-                                        `
-                                        <i class="
-                                            fa-solid
-                                            fa-arrow-up-right-from-square
-                                        "></i>
-
-                                        Open
-                                        `;
-
-                                }
-
-
-                                td.appendChild(
-                                    link
-                                );
-
-                            } else {
-
-                                td.textContent =
-                                    displayValue;
-
-                            }
-
-
-                            tr.appendChild(td);
-
-                        }
-
-
-                        tbody.appendChild(tr);
-
-                    }
-                );
-
-
-                /*
-                 * Resize after table
-                 * has rendered.
-                 */
-
-                requestAnimationFrame(
-                    function () {
-
-                        resizeTable();
-
-                    }
-                );
-
-            };
-
-
-
-        /* =========================================
-           EMPTY STATE
-        ========================================= */
-
-        function showEmpty(message) {
+    script.onerror =
+        function () {
 
             loading.style.display =
                 "none";
@@ -1414,94 +865,438 @@
 
                 <i class="
                     fa-solid
-                    fa-circle-info
+                    fa-triangle-exclamation
                 "></i>
 
-                ${message}
+                Unable to load Google Sheet.
+
+                <small>
+                    Please check that your
+                    Google Sheet is publicly accessible.
+                </small>
 
             `;
 
 
             resizeTable();
 
-        }
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
 
 
 
-        /* =========================================
-           DYNAMIC HEIGHT
-        ========================================= */
+/* =========================================
+   GOOGLE SHEET RESPONSE
+========================================= */
 
-        function resizeTable() {
-
-            if (
-                !tableWrapper ||
-                !table
-            ) {
-
-                return;
-
-            }
+window.renderTable =
+    function (response) {
 
 
-            /*
-             * If table has rows,
-             * use the actual table height.
-             */
-
-            if (
-                tbody.children.length > 0
-            ) {
-
-                const height =
-                    table.getBoundingClientRect()
-                        .height;
+        console.log(
+            "Google Sheet response:",
+            response
+        );
 
 
-                tableWrapper.style.height =
-                    `${height}px`;
-
-            } else {
-
-                /*
-                 * Keep enough height for
-                 * loading / empty message.
-                 */
-
-                tableWrapper.style.height =
-                    "160px";
-
-            }
-
-        }
+        loading.style.display =
+            "none";
 
 
-
-        /* =========================================
-           AUTO REFRESH
-        ========================================= */
 
         /*
-         * Refresh every 30 seconds.
+         * Validate response
          */
 
-        setInterval(
-            function () {
+        if (
+            !response ||
+            !response.table
+        ) {
 
-                loadSheet();
+            showEmpty(
+                "No data received from Google Sheet."
+            );
 
-            },
-            30000
+            return;
+
+        }
+
+
+
+        const columns =
+            response.table.cols || [];
+
+
+        const rows =
+            response.table.rows || [];
+
+
+
+        /*
+         * A1:E500 = 5 columns
+         */
+
+        const columnCount =
+            Math.min(
+                columns.length,
+                5
+            );
+
+
+
+        /* =====================================
+           REMOVE COMPLETELY EMPTY ROWS
+        ===================================== */
+
+        const activeRows =
+            rows.filter(
+                function (row) {
+
+
+                    if (
+                        !row ||
+                        !row.c
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    return row.c
+                        .slice(
+                            0,
+                            columnCount
+                        )
+                        .some(
+                            function (cell) {
+
+
+                                if (
+                                    !cell ||
+                                    cell.v === null ||
+                                    cell.v === undefined
+                                ) {
+
+                                    return false;
+
+                                }
+
+
+                                return String(
+                                    cell.v
+                                )
+                                .trim()
+                                .length > 0;
+
+                            }
+                        );
+
+                }
+            );
+
+
+
+        console.log(
+            "Active rows:",
+            activeRows.length
         );
 
 
 
-        /* =========================================
-           RESIZE
-        ========================================= */
+        /*
+         * No active rows
+         */
 
-        window.addEventListener(
-            "resize",
+        if (
+            activeRows.length === 0
+        ) {
+
+            thead.innerHTML =
+                "";
+
+            tbody.innerHTML =
+                "";
+
+            showEmpty(
+                "No active data available."
+            );
+
+            resizeTable();
+
+            return;
+
+        }
+
+
+        empty.style.display =
+            "none";
+
+
+
+        /* =====================================
+           CREATE HEADER
+        ===================================== */
+
+        thead.innerHTML =
+            "";
+
+
+        const headerRow =
+            document.createElement(
+                "tr"
+            );
+
+
+        for (
+            let i = 0;
+            i < columnCount;
+            i++
+        ) {
+
+
+            const th =
+                document.createElement(
+                    "th"
+                );
+
+
+            th.textContent =
+                columns[i].label ||
+                `Column ${i + 1}`;
+
+
+            headerRow.appendChild(
+                th
+            );
+
+        }
+
+
+        thead.appendChild(
+            headerRow
+        );
+
+
+
+        /* =====================================
+           CREATE TABLE BODY
+        ===================================== */
+
+        tbody.innerHTML =
+            "";
+
+
+        activeRows.forEach(
+            function (
+                row,
+                index
+            ) {
+
+
+                const tr =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                tr.style.animationDelay =
+                    `${index * 40}ms`;
+
+
+
+                for (
+                    let i = 0;
+                    i < columnCount;
+                    i++
+                ) {
+
+
+                    const td =
+                        document.createElement(
+                            "td"
+                        );
+
+
+                    const cell =
+                        row.c[i];
+
+
+
+                    /*
+                     * Empty cell
+                     */
+
+                    if (
+                        !cell ||
+                        cell.v === null ||
+                        cell.v === undefined
+                    ) {
+
+                        td.textContent =
+                            "";
+
+                        tr.appendChild(
+                            td
+                        );
+
+                        continue;
+
+                    }
+
+
+
+                    const rawValue =
+                        String(
+                            cell.v
+                        );
+
+
+                    const displayValue =
+                        cell.f !== undefined
+                            ? cell.f
+                            : rawValue;
+
+
+
+                    /* =================================
+                       URL DETECTION
+                    ================================= */
+
+                    if (
+
+                        rawValue.startsWith(
+                            "http://"
+                        )
+
+                        ||
+
+                        rawValue.startsWith(
+                            "https://"
+                        )
+
+                    ) {
+
+
+                        const link =
+                            document.createElement(
+                                "a"
+                            );
+
+
+                        link.href =
+                            rawValue;
+
+
+                        link.target =
+                            "_blank";
+
+
+                        link.rel =
+                            "noopener noreferrer";
+
+
+
+                        /*
+                         * YouTube
+                         */
+
+                        if (
+
+                            rawValue.includes(
+                                "youtube.com"
+                            )
+
+                            ||
+
+                            rawValue.includes(
+                                "youtu.be"
+                            )
+
+                        ) {
+
+
+                            link.innerHTML = `
+
+                                <i class="
+                                    fa-brands
+                                    fa-youtube
+                                "></i>
+
+                                Watch On YouTube
+
+                            `;
+
+                        }
+
+
+                        /*
+                         * Other URL
+                         */
+
+                        else {
+
+
+                            link.innerHTML = `
+
+                                <i class="
+                                    fa-solid
+                                    fa-arrow-up-right-from-square
+                                "></i>
+
+                                Open
+
+                            `;
+
+                        }
+
+
+                        td.appendChild(
+                            link
+                        );
+
+                    }
+
+
+                    /*
+                     * Normal text
+                     */
+
+                    else {
+
+                        td.textContent =
+                            displayValue;
+
+                    }
+
+
+                    tr.appendChild(
+                        td
+                    );
+
+                }
+
+
+                tbody.appendChild(
+                    tr
+                );
+
+            }
+        );
+
+
+
+        /* =====================================
+           RESIZE TABLE
+        ===================================== */
+
+        requestAnimationFrame(
             function () {
 
                 resizeTable();
@@ -1509,17 +1304,140 @@
             }
         );
 
+    };
 
 
-        /* =========================================
-           START
-        ========================================= */
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+function showEmpty(
+    message
+) {
+
+
+    loading.style.display =
+        "none";
+
+
+    empty.style.display =
+        "flex";
+
+
+    empty.innerHTML = `
+
+        <i class="
+            fa-solid
+            fa-circle-info
+        "></i>
+
+        ${message}
+
+    `;
+
+
+    resizeTable();
+
+}
+
+
+
+/* =========================================
+   DYNAMIC HEIGHT
+========================================= */
+
+function resizeTable() {
+
+
+    if (
+        !tableWrapper ||
+        !table
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Height is based only on
+     * the active rows returned
+     * from A1:E500.
+     */
+
+    if (
+        tbody.children.length > 0
+    ) {
+
+
+        const height =
+            table.getBoundingClientRect()
+                .height;
+
+
+        tableWrapper.style.height =
+            `${height}px`;
+
+    }
+
+
+    else {
+
+
+        tableWrapper.style.height =
+            "160px";
+
+    }
+
+}
+
+
+
+/* =========================================
+   AUTO REFRESH
+========================================= */
+
+
+/*
+ * Refresh every 30 seconds.
+ */
+
+setInterval(
+    function () {
 
         loadSheet();
 
-    </script>
+    },
+    30000
+);
 
 
 
+/* =========================================
+   WINDOW RESIZE
+========================================= */
 
-<script id="googleSheetScript" src="https://docs.google.com/spreadsheets/d/1G_gk5ec8sLd34kSf549DJJjQGDyYLwR8vZkz1AZyQVM/gviz/tq?gid=0&amp;tqx=responseHandler:renderTable&amp;tq=select%20*%20where%20A%20is%20not%20null"></script></body></html>
+window.addEventListener(
+    "resize",
+    function () {
+
+        resizeTable();
+
+    }
+);
+
+
+
+/* =========================================
+   START
+========================================= */
+
+loadSheet();
+
+
+</script>
+
+</body>
+
+</html>
